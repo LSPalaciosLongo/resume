@@ -1,11 +1,12 @@
 ﻿:root {
-  --bg: #eef3f8;
-  --surface: rgba(255, 255, 255, 0.88);
+  --bg: #edf3f8;
+  --surface: rgba(255, 255, 255, 0.9);
   --surface-strong: #ffffff;
   --text: #10233d;
-  --muted: #3f5168;
-  --primary: #1f5ea8;
+  --muted: #41556e;
+  --primary: #164f91;
   --primary-soft: #dce8f7;
+  --accent: #0f766e;
   --border: rgba(16, 35, 61, 0.08);
   --shadow: 0 24px 60px rgba(16, 35, 61, 0.12);
   --radius-lg: 28px;
@@ -27,14 +28,26 @@ body {
   font-family: "Manrope", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(31, 94, 168, 0.14), transparent 30%),
+    radial-gradient(circle at top left, rgba(22, 79, 145, 0.14), transparent 30%),
     linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
   line-height: 1.65;
 }
 
 a {
   color: inherit;
-  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.35);
+  outline-offset: 4px;
 }
 
 button {
@@ -58,7 +71,7 @@ button {
 
 .hero {
   display: grid;
-  grid-template-columns: 1.5fr 0.9fr;
+  grid-template-columns: 1.35fr 0.92fr;
   gap: 2rem;
   align-items: stretch;
   padding: 2.5rem;
@@ -67,7 +80,8 @@ button {
 
 .eyebrow,
 .section-tag,
-.project-type {
+.project-type,
+.group-label {
   margin: 0 0 0.8rem;
   color: var(--primary);
   font-size: 0.78rem;
@@ -85,22 +99,24 @@ button {
 }
 
 .hero h1 {
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
-  line-height: 0.96;
-  letter-spacing: -0.05em;
+  max-width: 11ch;
+  font-size: clamp(2.7rem, 6vw, 4.7rem);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
 }
 
 .hero-role {
   margin: 1rem 0 0;
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
   color: var(--primary);
 }
 
 .hero-summary {
-  max-width: 62ch;
+  max-width: 60ch;
   margin: 1rem 0 0;
   color: #32455d;
+  font-size: 1.02rem;
 }
 
 .hero-actions {
@@ -121,6 +137,7 @@ button {
   font-weight: 700;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn:hover {
@@ -130,7 +147,11 @@ button {
 .btn-primary {
   background: var(--primary);
   color: #fff;
-  box-shadow: 0 14px 28px rgba(31, 94, 168, 0.24);
+  box-shadow: 0 14px 28px rgba(22, 79, 145, 0.24);
+}
+
+.btn-primary:hover {
+  color: #fff;
 }
 
 .btn-secondary {
@@ -138,12 +159,17 @@ button {
   border-color: rgba(31, 94, 168, 0.22);
 }
 
+.contact-list,
+.hero-card-text,
+.evidence-list {
+  margin: 0;
+  padding: 0;
+}
+
 .contact-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem 1.25rem;
-  margin: 0;
-  padding: 0;
   list-style: none;
   color: var(--muted);
 }
@@ -178,7 +204,7 @@ button {
   padding: 0.7rem 1rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(31, 94, 168, 0.16);
+  border: 1px solid rgba(22, 79, 145, 0.16);
   color: var(--text);
   font-weight: 700;
 }
@@ -190,9 +216,9 @@ button {
   padding: 1.5rem;
   border-radius: calc(var(--radius-lg) - 8px);
   background:
-    linear-gradient(160deg, rgba(31, 94, 168, 0.1), rgba(255, 255, 255, 0.92)),
+    linear-gradient(160deg, rgba(22, 79, 145, 0.1), rgba(255, 255, 255, 0.94)),
     var(--surface-strong);
-  border: 1px solid rgba(31, 94, 168, 0.12);
+  border: 1px solid rgba(22, 79, 145, 0.12);
 }
 
 .hero-card-top {
@@ -203,11 +229,18 @@ button {
   font-weight: 600;
 }
 
+.hero-card-summary,
+.hero-metrics article,
+.stack-item,
+.project-card,
+.expand-block {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(16, 35, 61, 0.08);
+}
+
 .hero-card-summary {
   padding: 1rem 1.1rem;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(16, 35, 61, 0.08);
 }
 
 .hero-card-label {
@@ -220,14 +253,10 @@ button {
 }
 
 .hero-card-text {
-  margin: 0;
+  list-style: none;
   color: var(--muted);
   display: grid;
   gap: 0.35rem;
-}
-
-.hero-card-text span {
-  display: block;
 }
 
 .status-dot {
@@ -247,14 +276,12 @@ button {
 .hero-metrics article {
   padding: 1rem 1.1rem;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(16, 35, 61, 0.08);
 }
 
 .hero-metrics strong {
   display: block;
-  font-size: 2rem;
-  line-height: 1;
+  font-size: 1.15rem;
+  line-height: 1.2;
   margin-bottom: 0.35rem;
 }
 
@@ -264,11 +291,6 @@ button {
 .project-card p,
 .panel p {
   color: #374a61;
-}
-
-.justified {
-  text-align: justify;
-  text-justify: inter-word;
 }
 
 .content-grid {
@@ -285,7 +307,7 @@ button {
 
 .panel-highlight {
   background:
-    linear-gradient(135deg, rgba(31, 94, 168, 0.1), rgba(255, 255, 255, 0.92)),
+    linear-gradient(135deg, rgba(22, 79, 145, 0.1), rgba(255, 255, 255, 0.94)),
     var(--surface);
 }
 
@@ -344,7 +366,19 @@ button {
   font-weight: 700;
 }
 
-.stack-list {
+.evidence-list {
+  display: grid;
+  gap: 0.6rem;
+  padding-left: 1.1rem;
+  color: #374a61;
+}
+
+.evidence-list li::marker {
+  color: var(--accent);
+}
+
+.stack-list,
+.skill-groups {
   display: grid;
   gap: 1rem;
 }
@@ -352,8 +386,6 @@ button {
 .expand-block {
   margin-top: 1rem;
   padding: 1rem 1.1rem;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(16, 35, 61, 0.08);
   border-radius: var(--radius-sm);
 }
 
@@ -386,8 +418,6 @@ button {
 
 .stack-item {
   padding: 1rem 1.1rem;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(16, 35, 61, 0.08);
   border-radius: var(--radius-sm);
 }
 
@@ -414,14 +444,12 @@ button {
 .project-card {
   padding: 1.35rem;
   border-radius: var(--radius-sm);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(220, 232, 247, 0.65));
-  border: 1px solid rgba(16, 35, 61, 0.08);
   transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(31, 94, 168, 0.22);
+  border-color: rgba(22, 79, 145, 0.22);
 }
 
 .footer {
@@ -483,7 +511,27 @@ button {
   }
 
   .hero h1 {
+    max-width: none;
     font-size: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -503,6 +551,21 @@ button {
     box-shadow: none;
     backdrop-filter: none;
     break-inside: avoid;
+  }
+
+  .hero,
+  .content-grid,
+  .projects-grid {
+    display: block;
+  }
+
+  .panel,
+  .project-card,
+  .stack-item,
+  .hero-card-summary,
+  .hero-metrics article,
+  .expand-block {
+    border: 1px solid #d9e1ea;
   }
 
   .hero-actions {
